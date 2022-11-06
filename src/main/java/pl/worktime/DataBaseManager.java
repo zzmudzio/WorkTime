@@ -35,7 +35,8 @@ public abstract class DataBaseManager {
 
     public static void createRequiredTable(Connection srvConnection) {
             try {
-                String createTable = "USE "+ DATABASE_NAME+ ";CREATE TABLE work_time(id int identity(1,1), start_time varchar(100))";
+                String createTable = "USE "+ DATABASE_NAME+
+                        ";CREATE TABLE work_time(id int identity(1,1), start_date varchar(100), start_time varchar(100))";
                 Statement statement = srvConnection.createStatement();
                 statement.execute(createTable);
             }
