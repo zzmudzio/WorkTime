@@ -2,8 +2,6 @@ package pl.worktime;
 
 /* this class is responsible for database operations, i.e. db creation, data inserting and so on */
 
-import org.jetbrains.annotations.NotNull;
-
 import java.sql.*;
 
 public abstract class DataBaseManager {
@@ -30,10 +28,21 @@ public abstract class DataBaseManager {
         Statement statement = srvConnection.createStatement();
         statement.execute(createDatabase);
         System.out.println("Informacja: pomyślnie utworzono nową bazę danych.");
+        /* I assume that if the database was not created before, the table also wasn't */
+        createRequiredTable(srvConnection);
         return true;
     }
 
     public static void createRequiredTable(Connection srvConnection) {
-        //....
+            try {
+                String createTable = "USE "+ DATABASE_NAME+ ";CREATE TABLE work_time(id int identity(1,1), start_time varchar(100))";
+                Statement statement = srvConnection.createStatement();
+                statement.execute(createTable);
+            }
+            catch(SQLException se) {
+                System.out.println("Błąd: wystąpił błąd podczas próby utworzenia wymaganej tabeli 'work_time'");
+                se.printStackTrace();
+            }
+            System.out.println("Informacja: pomyślnie utworzono tabelę 'work_time'");
+        }
     }
-}

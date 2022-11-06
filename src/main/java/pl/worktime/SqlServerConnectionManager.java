@@ -45,7 +45,6 @@ public abstract class SqlServerConnectionManager {
         }
         catch(SQLException se) {
             System.out.println("Błąd: nie udało się połączyć z serwerem SQL.");
-            se.printStackTrace();
             return null;
         }
         return srvConnection;
