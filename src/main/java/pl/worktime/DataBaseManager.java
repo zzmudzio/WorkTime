@@ -6,6 +6,14 @@ import java.sql.*;
 
 public abstract class DataBaseManager {
     private static final String DATABASE_NAME = "zzmudzio_work_time";
+    private static final String TABLE_NAME = "work_time";
+
+    public static String getDatabaseName() {
+        return DATABASE_NAME;
+    }
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
     private static boolean checkIfDbExists(Connection srvConnection) throws SQLException {
         Statement statement = srvConnection.createStatement();
         String listAllDatabases = "SELECT name, database_id, create_date FROM sys.databases";
@@ -35,15 +43,16 @@ public abstract class DataBaseManager {
 
     public static void createRequiredTable(Connection srvConnection) {
             try {
-                String createTable = "USE "+ DATABASE_NAME+
-                        ";CREATE TABLE work_time(id int identity(1,1), start_date varchar(100), start_time varchar(100))";
+                String createTable = "USE "+ DATABASE_NAME +
+                        ";CREATE TABLE " + TABLE_NAME + "(id int identity(1,1), start_date varchar(100), " +
+                        "start_time varchar(100))";
                 Statement statement = srvConnection.createStatement();
                 statement.execute(createTable);
             }
             catch(SQLException se) {
-                System.out.println("Błąd: wystąpił błąd podczas próby utworzenia wymaganej tabeli 'work_time'");
+                System.out.println("Błąd: wystąpił błąd podczas próby utworzenia wymaganej tabeli: " + TABLE_NAME);
                 se.printStackTrace();
             }
-            System.out.println("Informacja: pomyślnie utworzono tabelę 'work_time'");
+            System.out.println("Informacja: pomyślnie utworzono tabelę: " + TABLE_NAME);
         }
     }
