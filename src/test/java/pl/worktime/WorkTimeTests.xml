@@ -1,0 +1,7 @@
+<suite name="WorkTime app Testing">
+    <test name="All crucial methods testing" >
+        <classes>
+            <class name="pl.worktime.DataBaseManagerTests" />
+        </classes>
+    </test>
+</suite>

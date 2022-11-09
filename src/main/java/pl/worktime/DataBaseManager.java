@@ -14,7 +14,7 @@ public abstract class DataBaseManager {
     public static String getTableName() {
         return TABLE_NAME;
     }
-    private static boolean checkIfDbExists(Connection srvConnection) {
+    public static boolean checkIfDbExists(Connection srvConnection) {
         try {
             Statement statement = srvConnection.createStatement();
             String listAllDatabases = "SELECT name, database_id, create_date FROM sys.databases";
@@ -26,7 +26,7 @@ public abstract class DataBaseManager {
             }
             return false;
         }
-        catch(SQLException se) {
+        catch(Exception se) {
             System.out.println("Błąd: wystąpił błąd podczas próby pobrania listy baz danych.");
             return false;
         }
