@@ -9,9 +9,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public abstract class SqlServerConnectionManager {
-    private static final String CONNECTION_FILE_PATH = System.getProperty("user.dir")+"\\connection-data.txt";
-    public static HashMap<String, String> getConnectionData() {
+public class SqlServerConnectionManager {
+
+    private static SqlServerConnectionManager instanceVar = null;
+    private final String CONNECTION_FILE_PATH = System.getProperty("user.dir")+"\\connection-data.txt";
+    private SqlServerConnectionManager() {}
+    public static SqlServerConnectionManager getInstance() {
+        if(instanceVar == null) {
+            instanceVar = new SqlServerConnectionManager();
+        }
+        return instanceVar;
+    }
+
+    public HashMap<String, String> getConnectionData() {
         HashMap<String, String> connectionData = new HashMap<>();
         BufferedReader reader;
         try {
@@ -30,7 +40,7 @@ public abstract class SqlServerConnectionManager {
         return connectionData;
     }
 
-    public static Connection connectToServer() {
+    public Connection connectToServer() {
         HashMap<String, String> connectionData;
         String connectionURL;
         Connection srvConnection;
@@ -39,18 +49,24 @@ public abstract class SqlServerConnectionManager {
             return null;
         }
         connectionURL = connectionData.get("server")+";"+"user="+connectionData.get("user")+";"
-                +"password="+connectionData.get("password");
+                +"password="+connectionData.get("password")+";encrypt=true;trustServerCertificate=true;";
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             srvConnection = DriverManager.getConnection(connectionURL);
+            return srvConnection;
         }
         catch(SQLException se) {
             System.out.println("Błąd: nie udało się połączyć z serwerem SQL.");
+            se.printStackTrace();
             return null;
         }
-        return srvConnection;
+        catch(ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+            return null;
+        }
     }
 
-    public static void disconnectFromServer(Connection srvConnection) {
+    public void disconnectFromServer(Connection srvConnection) {
         try {
             srvConnection.close();
         }

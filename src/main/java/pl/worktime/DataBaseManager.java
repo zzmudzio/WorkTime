@@ -14,28 +14,40 @@ public abstract class DataBaseManager {
     public static String getTableName() {
         return TABLE_NAME;
     }
-    private static boolean checkIfDbExists(Connection srvConnection) throws SQLException {
-        Statement statement = srvConnection.createStatement();
-        String listAllDatabases = "SELECT name, database_id, create_date FROM sys.databases";
-        ResultSet queryResult = statement.executeQuery(listAllDatabases);
-        while(queryResult.next()) {
-            if(queryResult.getString("name").equals(DATABASE_NAME)) {
-                return true;
+    private static boolean checkIfDbExists(Connection srvConnection) {
+        try {
+            Statement statement = srvConnection.createStatement();
+            String listAllDatabases = "SELECT name, database_id, create_date FROM sys.databases";
+            ResultSet queryResult = statement.executeQuery(listAllDatabases);
+            while (queryResult.next()) {
+                if (queryResult.getString("name").equals(DATABASE_NAME)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
+        catch(SQLException se) {
+            System.out.println("Błąd: wystąpił błąd podczas próby pobrania listy baz danych.");
+            return false;
+        }
     }
-    public static boolean createDatabase(Connection srvConnection) throws SQLException {
+    public static boolean createDatabase(Connection srvConnection){
         if(checkIfDbExists(srvConnection)) {
             System.out.println("Informacja: odnaleziono bazę " + DATABASE_NAME +" nowa baza nie zostanie założona.");
             return false;
         }
         System.out.println("Informacja: nie odnaleziono bazy danych o nazwie " + DATABASE_NAME
                 + ", nastąpi rejestracja nowej bazy.");
-        String createDatabase = "CREATE DATABASE " + DATABASE_NAME;
-        Statement statement = srvConnection.createStatement();
-        statement.execute(createDatabase);
-        System.out.println("Informacja: pomyślnie utworzono nową bazę danych.");
+        try {
+            String createDatabase = "CREATE DATABASE " + DATABASE_NAME;
+            Statement statement = srvConnection.createStatement();
+            statement.execute(createDatabase);
+            System.out.println("Informacja: pomyślnie utworzono nową bazę danych.");
+        }
+        catch(SQLException se) {
+            System.out.println("Błąd: wystąpił błąd podczas próby rejestracji nowej bazy danych.");
+            return false;
+        }
         /* I assume that if the database was not created before, the table also wasn't */
         createRequiredTable(srvConnection);
         return true;

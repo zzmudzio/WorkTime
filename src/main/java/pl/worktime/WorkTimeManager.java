@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 public class WorkTimeManager {
     private static ResultSet queryResult;
     private static PreparedStatement statement;
-    private static boolean checkDatePresence(Connection srvConnection) {
+    private static boolean checkDatePresence( Connection srvConnection) {
         // Date format is YYYY-MM-DD
         try {
              statement = srvConnection.prepareStatement("USE " + DataBaseManager.getDatabaseName()
@@ -65,9 +65,9 @@ public class WorkTimeManager {
                     + ", godzina rozpoczęcia: " + queryResult.getString("start_time");
         }
         catch(SQLException se) {
-            System.out.println("Błąd: wystąpił błąd podczas próby odczytu godziny rozpoczęcia pracy w dniu" +
+            System.out.println("Błąd: wystąpił błąd podczas próby odczytu godziny rozpoczęcia pracy w dniu " +
                     LocalDate.now().toString());
+            return "";
         }
-        return "";
     }
 }
