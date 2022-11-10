@@ -1,22 +1,6 @@
 # WorkTime
 This simple project had a goal to help me to get more acquainted with performing sql server database operations through java. 
 
-WorkTime <br/>
-├── .idea <br/>
-├── src <br/>
-│   ├── main <br/>
-│   │   └── java <br/>
-│   │       └── pl.worktime <br/>
-│   │           ├── DataBaseManager <br/>
-│   │           ├── Main <br/>
-│   │           ├── SqlServerConnectionManager <br/>
-│   │           └── WorkTimeManager <br/>
-│   └── test <br/>
-│       └── java <br/>
-│           └── pl.worktime <br/>
-│               ├── DataBaseManagerTests <br/>
-│               └── WorkTimeTests.xml <br/>
-├── target <br/>
-│   ├── workTime-jar-with-dependencies.jar <br/>
-│   └── ... <br/>
-└── connection-data.xml <br/>
+Project structure: 
+
+![2022-11-10_09h05_48](https://user-images.githubusercontent.com/99602564/201035206-998e0cdd-aa1c-47d0-922e-a965bef0be8d.png)
