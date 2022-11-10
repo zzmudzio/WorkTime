@@ -1,7 +1,7 @@
 # WorkTime
 This simple project had a goal to help me to get more acquainted with performing sql server database operations through java. 
 
-WorkTime
+WorkTime <br/>
 ├── .idea
 ├── src
 │   ├── main
