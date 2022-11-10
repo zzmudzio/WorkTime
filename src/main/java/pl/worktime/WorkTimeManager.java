@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 public class WorkTimeManager {
     private static ResultSet queryResult;
     private static PreparedStatement statement;
-    private static boolean checkDatePresence( Connection srvConnection) {
+    private static boolean checkDatePresence(Connection srvConnection) {
         // Date format is YYYY-MM-DD
         try {
              statement = srvConnection.prepareStatement("USE " + DataBaseManager.getDatabaseName()

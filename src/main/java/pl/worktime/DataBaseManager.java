@@ -7,7 +7,6 @@ import java.sql.*;
 public abstract class DataBaseManager {
     private static final String DATABASE_NAME = "zzmudzio_work_time";
     private static final String TABLE_NAME = "work_time";
-
     public static String getDatabaseName() {
         return DATABASE_NAME;
     }
@@ -42,15 +41,15 @@ public abstract class DataBaseManager {
             String createDatabase = "CREATE DATABASE " + DATABASE_NAME;
             Statement statement = srvConnection.createStatement();
             statement.execute(createDatabase);
+            /* I assume that if the database was not created before, the table also wasn't */
             System.out.println("Informacja: pomyślnie utworzono nową bazę danych.");
+            createRequiredTable(srvConnection);
+            return true;
         }
         catch(SQLException se) {
             System.out.println("Błąd: wystąpił błąd podczas próby rejestracji nowej bazy danych.");
             return false;
         }
-        /* I assume that if the database was not created before, the table also wasn't */
-        createRequiredTable(srvConnection);
-        return true;
     }
 
     public static void createRequiredTable(Connection srvConnection) {

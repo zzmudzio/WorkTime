@@ -8,20 +8,34 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DataBaseManagerTests {
-
     private Connection connection;
     @BeforeTest
     public void createConnection() {
         this.connection = SqlServerConnectionManager.getInstance().connectToServer();
     }
+
     @Test(priority=0)
     public void positiveTestCheckIfDbExists() {
-        System.out.println("[Positive Test] Verifying positive(valid data) scenario");
+        System.out.println("[Positive Test] checkIfDbExists: Verifying positive(valid data) scenario");
         Assert.assertTrue(DataBaseManager.checkIfDbExists(connection));
     }
 
-    @Test(priority=0)
+    @Test(priority=1)
     public void negativeTestCheckIfDbExists() {
+        System.out.println("[Negative Test] checkIfDbExists: Verifying negative(invalid data) scenario");
+        Connection fakeConnection = null;
+        Assert.assertFalse(DataBaseManager.checkIfDbExists(fakeConnection));
+    }
+
+    @Test(priority=2)
+    public void positiveTestCreateDb() {
+        System.out.println("[Positive Test] createDb: Verifying positive(valid data) scenario");
+        Assert.assertTrue(DataBaseManager.createDatabase(connection));
+    }
+
+    @Test(priority=3)
+    public void negativeTestCreateDb() {
+        System.out.println("[Negative Test] createDb: Verifying negative(invalid data) scenario");
         Connection fakeConnection = null;
         Assert.assertFalse(DataBaseManager.checkIfDbExists(fakeConnection));
     }
