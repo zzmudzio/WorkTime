@@ -10,6 +10,8 @@ Project structure:
 Prerequisites:
 - connection-data.txt file has to be filled with correct data
 - sql user must have 'dbcreator' role 
+- 3 ENV variables have to be added manually: ZZMUDZIO_SQL_BRW_NAME = [here name of sql browser service], ZZMUDZIO_SQL_NAME = [here name of sql server instance],  
+ZZMUDZIO_SQL_CONN_DATA = [here the path to the sql-connection-data.txt file](the file is added to this repo, so just fill it with correct data and put it's path into environmental variable). These variables are necessary because application, when added to the autostart, during execution is waiting for services to start. 
 
 First run: 
 
@@ -17,7 +19,7 @@ First run:
 
 <hr>
 
-<code>java -cp .\target\workTime-jar-with-dependencies.jar pl.worktime.Main insert</code> It is responsible for inserting a current time and date into a database. This command should be added to an autostart bat file. If the date is already present in a database, the proper response will be displayed. 
+<code>java -cp .\target\workTime-jar-with-dependencies.jar pl.worktime.Main insert</code> It is responsible for inserting a current time and date into a database. This command(with proper jar path) should be added to an autostart bat file. If the date is already present in a database, the applicable response will be displayed. 
 
 
 <code>java -cp .\target\workTime-jar-with-dependencies.jar pl.worktime.Main </code> This command just displays a start_time for current day. 
