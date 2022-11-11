@@ -23,11 +23,11 @@ public class SqlServerServices {
             BufferedReader myReader = new BufferedReader(new InputStreamReader(myProcess.getInputStream()));
             while ((serviceData = myReader.readLine()) != null) {
                 if (serviceData.contains("RUNNING")) {
-                    System.out.println("Usługa " + serviceName + " jest uruchomiona.");
+                    System.out.println("Usługa " + getServiceName(serviceName) + " jest uruchomiona.");
                     return 1;
                 }
             }
-            System.out.println("Usługa " + serviceName +" oczekuje na uruchomienie..");
+            System.out.println("Usługa " + getServiceName(serviceName) +" oczekuje na uruchomienie..");
             return 0;
         }
         catch(IOException ioe) {
@@ -53,7 +53,7 @@ public class SqlServerServices {
             boolean loopContinue = true;
             int serviceStatus = 0;
             for (String service : sqlServices) { //to check whether all desired services are running
-                System.out.println("Oczekiwanie na uruchomienie usługi " + service);
+                System.out.println("Oczekiwanie na uruchomienie usługi " + getServiceName(service));
                 while(loopContinue) {
                     serviceStatus = checkIfServiceIsRunning(service);
                     switch(serviceStatus) {

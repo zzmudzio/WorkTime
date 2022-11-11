@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class SqlServerConnectionManager {
 
     private static SqlServerConnectionManager instanceVar = null;
-    private final String CONNECTION_FILE_PATH = System.getProperty("user.dir")+"\\connection-data.txt";
+    private final String CONNECTION_FILE_PATH = System.getenv("ZZMUDZIO_SQL_CONN_DATA")+"connection-data.txt";
     private SqlServerConnectionManager() {}
     public static SqlServerConnectionManager getInstance() {
         if(instanceVar == null) {
