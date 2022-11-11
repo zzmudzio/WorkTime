@@ -50,7 +50,7 @@ public class WorkTimeManager {
             }
         }
         else {
-            System.out.println("Podana data występuje już w bazie danych i nie zostanie dodana. ");
+            System.out.println("Podana data("+LocalDate.now().toString()+") występuje już w bazie danych i nie zostanie dodana. ");
         }
     }
     public static String displayTodayStartTime(Connection srvConnection) { //it will display an information alert consisting of
