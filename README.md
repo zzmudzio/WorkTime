@@ -10,7 +10,9 @@ Project structure:
 Prerequisites:
 - connection-data.txt file has to be filled with correct data
 - sql user must have 'dbcreator' role 
-- 3 ENV variables have to be added manually: ZZMUDZIO_SQL_BRW_NAME = [here name of sql browser service], ZZMUDZIO_SQL_NAME = [here name of sql server instance],  
+- 3 ENV variables have to be added manually: <br/> 
+ZZMUDZIO_SQL_BRW_NAME = [here name of sql browser service], <br/>
+ZZMUDZIO_SQL_NAME = [here name of sql server instance], <br/>
 ZZMUDZIO_SQL_CONN_DATA = [here the path to the sql-connection-data.txt file](the file is added to this repo, so just fill it with correct data and put it's path into environmental variable). These variables are necessary because application, when added to the autostart, during execution is waiting for services to start. 
 
 First run: 
