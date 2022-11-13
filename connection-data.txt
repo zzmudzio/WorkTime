@@ -1,3 +1,0 @@
-server==jdbc:sqlserver://server
-user==username
-password==userpassword
