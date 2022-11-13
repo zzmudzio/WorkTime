@@ -1,3 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/Insert.bat
+/Install.bat
+/StartTime.bat
+/ascii tree.txt
+/dependency-reduced-pom.xml
+/target/
