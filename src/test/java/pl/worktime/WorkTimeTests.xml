@@ -2,6 +2,7 @@
     <test name="All crucial methods testing" >
         <classes>
             <class name="pl.worktime.DataBaseManagerTests" />
+            <class name="pl.worktime.SqlServerServicesTests" />
         </classes>
     </test>
 </suite>
