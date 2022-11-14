@@ -36,13 +36,13 @@ public class SqlServerServices {
         }
     }
     public static String getServiceName(String envName) {
-        return System.getenv(envName);
+        return System.getenv(envName) == null? "ERROR" : System.getenv(envName);
     }
     public static String[] getEnvs() {
         return new String[] {SQL_SRV_BROWSER_NAME_ENV, SQL_SRV_NAME_ENV};
     }
 
-    public static boolean areServicesReady() throws InterruptedException {
+    public static boolean areServicesReady(){
         boolean sysEnvVarsStatus = SqlServerServices.checkIfEnvVarsAreSet();
         if(!sysEnvVarsStatus) {
             System.out.println("Błąd: Zmienne środowiskowe nie zostały prawidłowo ustawione, przerywam.");
@@ -60,7 +60,12 @@ public class SqlServerServices {
                         case -1:
                             return false;
                         case 0:
-                            Thread.sleep(5000);
+                            try {
+                                Thread.sleep(5000);
+                            }
+                            catch(InterruptedException ie) {
+                                System.out.println("Błąd: interrupted exception.");
+                            }
                             break;
                         case 1:
                             loopContinue = false;
