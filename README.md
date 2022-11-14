@@ -5,7 +5,9 @@ The main purpose of the app is to save, once a day an information about what tim
 
 Project structure: 
 
-![2022-11-10_09h05_48](https://user-images.githubusercontent.com/99602564/201035206-998e0cdd-aa1c-47d0-922e-a965bef0be8d.png)
+![2022-11-14_08h52_37](https://user-images.githubusercontent.com/99602564/201604613-6cfd13a2-9c83-4c79-ac76-81fe2073c5ee.png)
+
+
 
 Prerequisites:
 - connection-data.txt file has to be filled with correct data
